@@ -4,7 +4,6 @@
 @Date: 2024/10/09 11:30
 @Version: 1.0
 """
-from math import factorial
 
 
 # todo:
