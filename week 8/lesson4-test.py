@@ -24,8 +24,8 @@ with open(path, "r") as f:  # 使用 with 语句自动管理文件关闭
     reader = csv.reader(f)
     content = []
     for row in reader:
-        # 使用制表符将列表中的元素连接成一个字符串，使之呈现正常的制表效果
-        content.append('\t'.join(row))
+        # 将 csv 的每一行内容按制表符分割成一系列字符串
+        content.append(row[0].split('\t'))
 
 # 打印前5行内容
 for i in range(0, 5):
@@ -43,8 +43,8 @@ todo:
 """
 
 qualities = []
-for row in content[1:]:
-    qualities.append(int(row[-1]))
+for content_row in content[1:]:
+    qualities.append(int(content_row[-1]))
 unity_quality = set(qualities)
 print (unity_quality)
 
@@ -61,12 +61,12 @@ todo:
 
 content_dict = {}
 
-for row in content[1:]:
-    quality = int(row[-1])
+for content_row in content[1:]:
+    quality = int(content_row[-1])
     if quality not in content_dict.keys():
-        content_dict[quality] = [row]
+        content_dict[quality] = [content_row]
     else:
-        content_dict[quality].append(row)
+        content_dict[quality].append(content_row)
 # 按等级排序顺序输出子集
 for key in sorted(content_dict.keys()):
     print(f"Quality: {key}, List: {content_dict[key]}")
@@ -101,8 +101,8 @@ mean_tuple = []
 
 for quality, list in content_dict.items():
     sum_ = 0
-    for row in list:
-        sum_ += float(row[0])
+    for content_row in list:
+        sum_ += float(content_row[0])
     mean_tuple.append((quality, sum_/len(list)))
 
 print (mean_tuple)
