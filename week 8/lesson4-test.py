@@ -20,14 +20,17 @@ todo:
 import csv
 
 path = "white_wine.csv"
-with open(path, "r") as f:  # 使用 with 语句自动管理文件关闭
+with open(path, "r") as f:  # 使用 with 语句自动释放文件资源
+    # 创建 csv reader 实例
     reader = csv.reader(f)
     content = []
     for row in reader:
-        # 将 csv 的每一行内容按制表符分割成一系列字符串
+        # reader 将每一行内容当作列表存进 `content`
+        # 但以制表符分隔的 csv 在读取时会以整行作为一个字符串读取（列表只有一个长字符串）
+        # 故按制表符分割成一系列字符串，存成有多个元素的列表
         content.append(row[0].split('\t'))
 
-# 打印前5行内容
+# 打印前5行内容，分行打印使之呈现更清晰
 for i in range(0, 5):
     print(content[i])
 
@@ -43,10 +46,13 @@ todo:
 """
 
 qualities = []
+# 从数据行（第1行）开始读
 for content_row in content[1:]:
+    # 将数据行的最后一个元素（即 quality ）存入 `qualities` 列表中
     qualities.append(int(content_row[-1]))
+# 用 set 对 `qualities` 去重
 unity_quality = set(qualities)
-print (unity_quality)
+print(unity_quality)
 
 """
 todo:
@@ -63,8 +69,10 @@ content_dict = {}
 
 for content_row in content[1:]:
     quality = int(content_row[-1])
+    # 当 quality 不在 `content_dict` ，即该 quality 第一次出现时，创建以该 quality 为键，存入该`数据行`的 list 为值的 KV 。
     if quality not in content_dict.keys():
         content_dict[quality] = [content_row]
+    # 后续同一 quality 下的数据行被加入到相应 KV 中的值（即`数据行 list`）中
     else:
         content_dict[quality].append(content_row)
 # 按等级排序顺序输出子集
@@ -83,6 +91,7 @@ todo:
 number_tuple = []
 
 for quality, list in content_dict.items():
+    # 使用 len() 对数据行计数
     number_tuple.append((quality, len(list)))
 
 print(number_tuple)
@@ -102,7 +111,9 @@ mean_tuple = []
 for quality, list in content_dict.items():
     sum_ = 0
     for content_row in list:
+        # 从 `content_dict`中读 fixed acidity 并进行加和
         sum_ += float(content_row[0])
+    # 将`加和`除以样本数取平均
     mean_tuple.append((quality, sum_/len(list)))
 
 print (mean_tuple)
