@@ -29,11 +29,6 @@ def is_natural(n):
 
 def is_prime(n):
 
-    try:
-        is_natural(n)
-    except ValueError as e:
-        raise e
-
     is_natural(n)
     # 若在上一语句没有异常抛出，说明输入确为自然数，可以安全地进行转换
     n = int(n)
