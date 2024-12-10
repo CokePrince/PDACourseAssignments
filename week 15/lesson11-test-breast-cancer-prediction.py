@@ -1,3 +1,14 @@
+"""
+@Description: 第十五周课后作业——通过乳腺癌数据集比较三种模型的精确度（逻辑回归、随机森林、KNN）
+@Author: 王宁远
+@Date: 2024/12/10 16:49
+@Version: 1.0
+"""
+
+# todo:
+
+# 通过乳腺癌数据集比较三种模型的精确度（逻辑回归、随机森林、KNN）
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier

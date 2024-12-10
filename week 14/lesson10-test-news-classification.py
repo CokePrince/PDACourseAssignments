@@ -1,5 +1,5 @@
 """
-@Description: 第十三四课后作业——使用朴素贝叶斯和KNN进行新闻分类预测
+@Description: 第十四周课后作业——使用朴素贝叶斯和KNN进行新闻分类预测
 @Author: 王宁远
 @Date: 2024/11/27 11:49
 @Version: 1.0
