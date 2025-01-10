@@ -1,8 +1,8 @@
 """
 @Description: 期末大作业——预测歌曲是否有显式标记的主文件
 @Author: 王宁远
-@Date: 2025/01/09 16:53
-@Version: 1.0.0
+@Date: 2025/01/10 20:57
+@Version: 1.0.1
 """
 
 # todo: 预测歌曲是否有显式标记
@@ -249,6 +249,9 @@ def train_model_with_search(model_type, x_train, y_train, search_type=None, para
 def tensor_flow(x_train, y_train, x_test, y_test):
     logging.info("Training tensor flow classifier...")
 
+    tf.random.set_seed(42)
+    np.random.seed(42)
+
     # 定义模型构建函数
     def build_model(hp):
         model = Sequential([
@@ -485,31 +488,31 @@ if __name__ == "__main__":
         'max_iter': randint(500, 1000)
     }
 
-    rf = train_model_with_search("random_forest", x_train, y_train)
-    predict(rf, x_test, y_test, "rf", True)
-
-    rf_grid = train_model_with_search("random_forest", x_train, y_train, "grid", param_grid_rf)
-    predict(rf_grid, x_test, y_test, "rf_grid", True)
-
-    rf_random = train_model_with_search("random_forest", x_train, y_train, "random", param_dist_rf)
-    predict(rf_random, x_test, y_test, "rf_random", True)
-
-    gb = train_model_with_search("gradient_boost", x_train, y_train)
-    predict(gb, x_test, y_test, "gb", True)
-
-    gb_grid = train_model_with_search("gradient_boost", x_train, y_train, "grid", param_grid_gb)
-    predict(gb_grid, x_test, y_test, "gb_grid", True)
-
-    gb_random = train_model_with_search("gradient_boost", x_train, y_train, "random", param_dist_gb)
-    predict(gb_random, x_test, y_test, "gb_random", True)
-
-    nn = train_model_with_search("neural_network", x_train, y_train)
-    predict(nn, x_test, y_test, "nn", False)
-
-    nn_grid = train_model_with_search("neural_network", x_train, y_train, "grid", param_grid_nn)
-    predict(nn_grid, x_test, y_test, "nn_grid", False)
-
-    nn_random = train_model_with_search("neural_network", x_train, y_train, "random", param_dist_nn)
-    predict(nn_random, x_test, y_test, "nn_random", False)
+    # rf = train_model_with_search("random_forest", x_train, y_train)
+    # predict(rf, x_test, y_test, "rf", True)
+    #
+    # rf_grid = train_model_with_search("random_forest", x_train, y_train, "grid", param_grid_rf)
+    # predict(rf_grid, x_test, y_test, "rf_grid", True)
+    #
+    # rf_random = train_model_with_search("random_forest", x_train, y_train, "random", param_dist_rf)
+    # predict(rf_random, x_test, y_test, "rf_random", True)
+    #
+    # gb = train_model_with_search("gradient_boost", x_train, y_train)
+    # predict(gb, x_test, y_test, "gb", True)
+    #
+    # gb_grid = train_model_with_search("gradient_boost", x_train, y_train, "grid", param_grid_gb)
+    # predict(gb_grid, x_test, y_test, "gb_grid", True)
+    #
+    # gb_random = train_model_with_search("gradient_boost", x_train, y_train, "random", param_dist_gb)
+    # predict(gb_random, x_test, y_test, "gb_random", True)
+    #
+    # nn = train_model_with_search("neural_network", x_train, y_train)
+    # predict(nn, x_test, y_test, "nn", False)
+    #
+    # nn_grid = train_model_with_search("neural_network", x_train, y_train, "grid", param_grid_nn)
+    # predict(nn_grid, x_test, y_test, "nn_grid", False)
+    #
+    # nn_random = train_model_with_search("neural_network", x_train, y_train, "random", param_dist_nn)
+    # predict(nn_random, x_test, y_test, "nn_random", False)
 
     tensor_flow(x_train, y_train, x_test, y_test)
